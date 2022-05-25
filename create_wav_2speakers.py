@@ -13,11 +13,11 @@ FILELIST_STUB = os.path.join('metadata', 'mix_2_spk_filenames_{}.csv')
 BINAU = True  # Generate binaural audio
 
 
-def main(wsj_root, hrtf_root, output_root):
+def main(wsj_root, output_root):
 
     scaling_npz_stub = os.path.join('metadata', 'scaling_{}.npz')
     hrtf_meta_stub = os.path.join('metadata', 'hrtf_meta_{}.csv')
-    hrtf_wav_path = os.path.join(hrtf_root, 'wav_database')
+    hrtf_wav_path = os.path.join('CIPIC_hrtf_database', 'wav_database')
 
     for sr_str in ['8k','16k']:
         wav_dir = 'wav' + sr_str
@@ -78,10 +78,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--wsj0-root', type=str,
                         help='Path to the folder containing wsj0/')
-    parser.add_argument('--hrtf-root', type=str,
-                        help='Path to the hrtf folder containing wav_database/')
     parser.add_argument('--output-dir', type=str,
                         help='Output directory for writing binaural wsj0-2mix.')
     args = parser.parse_args()
-    main(args.wsj0_root, args.hrtf_root, args.output_dir)
+    main(args.wsj0_root, args.output_dir)
 
