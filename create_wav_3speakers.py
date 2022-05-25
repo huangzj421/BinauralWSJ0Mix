@@ -10,7 +10,7 @@ S2_DIR = 's2'
 S3_DIR = 's3'
 MIX_DIR = 'mix'
 
-FILELIST_STUB = os.path.join('data', 'mix_3_spk_filenames_{}.csv')
+FILELIST_STUB = os.path.join('metadata', 'mix_3_spk_filenames_{}.csv')
 BINAU = True  # Generate binaural audio
 
 
