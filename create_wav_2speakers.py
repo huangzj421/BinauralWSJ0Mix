@@ -5,15 +5,15 @@ import argparse
 from utils import wavwrite, read_scaled_wav, fix_length, convolve_hrtf
 
 
-S1_DIR = 's1'
-S2_DIR = 's2'
-MIX_DIR = 'mix'
-
-FILELIST_STUB = os.path.join('metadata', 'mix_2_spk_filenames_{}.csv')
-BINAU = True  # Generate binaural audio
 
 
-def main(wsj_root, output_root):
+def create_binaural_wsj0mix(wsj_root, output_root):
+    
+    S1_DIR = 's1'
+    S2_DIR = 's2'
+    MIX_DIR = 'mix'
+    FILELIST_STUB = os.path.join('metadata', 'mix_2_spk_filenames_{}.csv')
+    BINAU = True  # Generate binaural audio
 
     scaling_npz_stub = os.path.join('metadata', 'scaling_{}.npz')
     hrtf_meta_stub = os.path.join('metadata', 'hrtf_meta_{}.csv')
@@ -81,5 +81,5 @@ if __name__ == '__main__':
     parser.add_argument('--output-dir', type=str,
                         help='Output directory for writing binaural wsj0-2mix.')
     args = parser.parse_args()
-    main(args.wsj0_root, args.output_dir)
+    create_binaural_wsj0mix(args.wsj0_root, args.output_dir)
 
