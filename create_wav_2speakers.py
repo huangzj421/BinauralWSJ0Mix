@@ -5,8 +5,6 @@ import argparse
 from utils import wavwrite, read_scaled_wav, fix_length, convolve_hrtf
 
 
-
-
 def create_binaural_wsj0mix(wsj_root, output_root):
     
     S1_DIR = 's1'
