@@ -10,12 +10,13 @@ def create_binaural_wsj0mix(wsj_root, output_root):
     S1_DIR = 's1'
     S2_DIR = 's2'
     MIX_DIR = 'mix'
-    FILELIST_STUB = os.path.join('metadata', 'mix_2_spk_filenames_{}.csv')
+    pypath = os.path.dirname(__file__)
+    FILELIST_STUB = os.path.join(pypath, 'metadata', 'mix_2_spk_filenames_{}.csv')
     BINAU = True  # Generate binaural audio
 
-    scaling_npz_stub = os.path.join('metadata', 'scaling_{}.npz')
-    hrtf_meta_stub = os.path.join('metadata', 'hrtf_meta_{}.csv')
-    hrtf_wav_path = os.path.join('CIPIC_hrtf_database', 'wav_database')
+    scaling_npz_stub = os.path.join(pypath, 'metadata', 'scaling_{}.npz')
+    hrtf_meta_stub = os.path.join(pypath, 'metadata', 'hrtf_meta_{}.csv')
+    hrtf_wav_path = os.path.join(pypath, 'CIPIC_hrtf_database', 'wav_database')
 
     for sr_str in ['8k','16k']:
         wav_dir = 'wav' + sr_str
