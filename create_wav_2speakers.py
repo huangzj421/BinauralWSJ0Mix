@@ -5,7 +5,8 @@ import argparse
 from utils import wavwrite, read_scaled_wav, fix_length, convolve_hrtf
 
 
-def create_binaural_wsj0mix(wsj_root, output_root):
+def create_binaural_wsj0mix(wsj_root, output_root, 
+                            datafreqs=['8k','16k'], datamodes=['min','max']):
     
     S1_DIR = 's1'
     S2_DIR = 's2'
@@ -18,7 +19,7 @@ def create_binaural_wsj0mix(wsj_root, output_root):
     hrtf_meta_stub = os.path.join(pypath, 'metadata', 'hrtf_meta_{}.csv')
     hrtf_wav_path = os.path.join(pypath, 'CIPIC_hrtf_database', 'wav_database')
 
-    for sr_str in ['8k','16k']:
+    for sr_str in datafreqs:
         wav_dir = 'wav' + sr_str
         if sr_str == '8k':
             sr = 8000
@@ -27,7 +28,7 @@ def create_binaural_wsj0mix(wsj_root, output_root):
             sr = 16000
             downsample = False
 
-        for datalen_dir in ['min','max']:
+        for datalen_dir in datamodes:
             for splt in ['tt','cv','tr']:
                 output_path = os.path.join(output_root, wav_dir, datalen_dir, splt)
 
