@@ -1,11 +1,11 @@
 import numpy as np
-import soundfile as sf
+from scipy.io import wavfile
 from scipy.signal import resample_poly, fftconvolve
 import os
 
 
 def read_scaled_wav(path, scaling_factor, downsample_8K=False):
-    samples, sr_orig = sf.read(path)
+    sr_orig, samples = wavfile.read(path)
 
     if len(samples.shape) > 1:
         samples = samples[:, 0]
@@ -16,20 +16,14 @@ def read_scaled_wav(path, scaling_factor, downsample_8K=False):
     return samples
 
 
-def wavwrite_quantize(samples):
-    return np.int16(np.round((2 ** 15) * samples))
-
-
 def quantize(samples):
-    int_samples = wavwrite_quantize(samples)
-    return np.float64(int_samples) / (2 ** 15)
+    return np.float64(samples) / (2 ** 15)
 
 
 def wavwrite(file, samples, sr):
     """This is how the old Matlab function wavwrite() quantized to 16 bit.
     We match it here to maintain parity with the original dataset"""
-    int_samples = wavwrite_quantize(samples)
-    sf.write(file, int_samples, sr, subtype='PCM_16')
+    wavfile.write(file, sr, samples.astype(np.int16))
 
 
 def append_or_truncate(s1_samples, s2_samples, noise_samples, min_or_max='max', start_samp_16k=0, downsample=False):
@@ -136,7 +130,7 @@ def convolve_hrtf(samples_ori_list, hrtf_wav_path, hrtf_df, output_name, sr_orig
 
         for i, loc in enumerate(['left','right']):
             hrtf_file = os.path.join(hrtf_wav_path, subject, '{}az{}.wav'.format(azimuth.astype('str').replace('-','neg'), loc))
-            hrtf, sr = sf.read(hrtf_file)
+            sr, hrtf = wavfile.read(hrtf_file)
             hrtf = resample_poly(hrtf, sr_orig, sr, axis=1)
             samples[:,i] = fftconvolve(samples_ori, hrtf[elevation_index], mode='same')
         
@@ -172,7 +166,7 @@ def convolve_hrtf3(samples_ori_list, hrtf_wav_path, hrtf_df, output_name, sr_ori
         
         for i, loc in enumerate(['left','right']):
             hrtf_file = os.path.join(hrtf_wav_path, subject, '{}az{}.wav'.format(azimuth.astype('str').replace('-','neg'), loc))
-            hrtf, sr = sf.read(hrtf_file)
+            sr, hrtf = wavfile.read(hrtf_file)
             hrtf = resample_poly(hrtf, sr_orig, sr, axis=1)
             samples[:,i] = fftconvolve(samples_ori, hrtf[elevation_index], mode='same')
         
