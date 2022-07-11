@@ -127,7 +127,7 @@ def convolve_hrtf(samples_ori_list, hrtf_wav_path, hrtf_df, output_name, sr_orig
     for sub in [1,2]:
         samples_ori = samples_ori_list[sub-1]
         samples = np.zeros((len(samples_ori),2)) # binaural
-        subject = hrtf_row['subject{}'.format(sub)].iloc[0]
+        subject = hrtf_row['subject'].iloc[0]
         azimuth = hrtf_row['azimuth{}'.format(sub)].iloc[0]
         elevation = hrtf_row['elevation{}'.format(sub)].iloc[0]
         elevation_index = hrtf_row['elevation_index{}'.format(sub)].iloc[0]
@@ -144,9 +144,12 @@ def convolve_hrtf(samples_ori_list, hrtf_wav_path, hrtf_df, output_name, sr_orig
         spatial_scaling = np.sqrt(np.sum(samples_ori ** 2) * 2 / np.sum(samples ** 2))
         samples_list.append(samples * spatial_scaling)
 
-    output_name = output_name.split('_')[0]+'_'+str(angles_list[0])+'_' \
-                  +str(angles_list[1])+'_'+output_name.split('_')[2]+'_' \
-                  +str(angles_list[2])+'_'+str(angles_list[3])+'.wav'
+    output_name = subject+'_'+output_name.split('_')[0]+'_' \
+                  +str(angles_list[0])+'_' \
+                  +str(angles_list[1])+'_' \
+                  +output_name.split('_')[2]+'_' \
+                  +str(angles_list[2])+'_' \
+                  +str(angles_list[3])+'.wav'
     samples_list.append(output_name)
 
     return samples_list
@@ -160,7 +163,7 @@ def convolve_hrtf3(samples_ori_list, hrtf_wav_path, hrtf_df, output_name, sr_ori
     for sub in [1,2,3]:
         samples_ori = samples_ori_list[sub-1]
         samples = np.zeros((len(samples_ori),2)) # binaural
-        subject = hrtf_row['subject{}'.format(sub)].iloc[0]
+        subject = hrtf_row['subject'].iloc[0]
         azimuth = hrtf_row['azimuth{}'.format(sub)].iloc[0]
         elevation = hrtf_row['elevation{}'.format(sub)].iloc[0]
         elevation_index = hrtf_row['elevation_index{}'.format(sub)].iloc[0]
@@ -177,10 +180,14 @@ def convolve_hrtf3(samples_ori_list, hrtf_wav_path, hrtf_df, output_name, sr_ori
         spatial_scaling = np.sqrt(np.sum(samples_ori ** 2) * 2 / np.sum(samples ** 2))
         samples_list.append(samples * spatial_scaling)
 
-    output_name = output_name.split('_')[0]+'_'+str(angles_list[0])+'_' \
-                  +str(angles_list[1])+'_'+output_name.split('_')[2]+'_' \
-                  +str(angles_list[2])+'_'+str(angles_list[3])+'_' \
-                  +output_name.split('_')[4]+'_'+str(angles_list[4])+'_' \
+    output_name = subject+'_'+output_name.split('_')[0]+'_' \
+                  +str(angles_list[0])+'_' \
+                  +str(angles_list[1])+'_' \
+                  +output_name.split('_')[2]+'_' \
+                  +str(angles_list[2])+'_' \
+                  +str(angles_list[3])+'_' \
+                  +output_name.split('_')[4]+'_' \
+                  +str(angles_list[4])+'_' \
                   +str(angles_list[5])+'.wav'
     samples_list.append(output_name)
 
