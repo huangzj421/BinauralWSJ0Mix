@@ -186,3 +186,33 @@ def convolve_hrtf3(samples_ori_list, hrtf_wav_path, hrtf_df, output_name, sr_ori
     samples_list.append(output_name)
 
     return samples_list
+
+
+def convolve_hrtf_reverb(samples_ori_list, hrtf_wav_path, hrtf_df, output_name, sr_orig):
+    hrtf_row = hrtf_df[hrtf_df['utterance_id'] == output_name]
+    samples_list = []
+    angles_list = []
+
+    for sub in [1,2]:
+        samples_ori = samples_ori_list[sub-1]
+        samples_ori = np.stack((samples_ori, samples_ori),1)
+        reverb_time = hrtf_row['reverb_time'].iloc[0]
+        azimuth = hrtf_row['azimuth{}'.format(sub)].iloc[0]
+        angles_list.append(azimuth)
+        
+        hrtf_file = os.path.join(hrtf_wav_path, reverb_time, 'CATT_{}_{}.wav'.format(reverb_time, azimuth))
+        sr, hrtf = wavfile.read(hrtf_file)
+        hrtf = resample_poly(hrtf, sr_orig, sr)
+        samples = fftconvolve(samples_ori, hrtf, mode='same')
+        
+        # Make relative source energy same with original
+        spatial_scaling = np.sqrt(np.sum(samples_ori ** 2) / np.sum(samples ** 2))
+        samples_list.append(samples * spatial_scaling)
+
+    output_name = reverb_time+'_'+output_name.split('_')[0]+'_' \
+                  +str(angles_list[0])+'_' \
+                  +output_name.split('_')[2]+'_' \
+                  +str(angles_list[1])+'.wav'
+    samples_list.append(output_name)
+
+    return samples_list

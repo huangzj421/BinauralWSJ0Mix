@@ -1,9 +1,10 @@
 # Binaural WSJ0Mix dataset
 
-Clean binaural separation dataset for two or three speakers in [Real-time binaural speech separation with preserved spatial cues](https://ieeexplore.ieee.org/abstract/document/9053215). Briefly, we randomly sampled two or three speaker locations in the HRTF database from the CIPIC, convolved with randomly sampled two or three utterances from the wsj0 and mixed them all.
+Binaural separation dataset for two or three speakers in [Real-time binaural speech separation with preserved spatial cues](https://ieeexplore.ieee.org/abstract/document/9053215). Briefly, we randomly sampled 2 or 3 speaker locations in the HRTF database from the CIPIC, convolved with randomly sampled two or three utterances from the wsj0 and mixed them all. Also, we created 2 speakers mixture with DEMAND noise or simulated BRIR reverberance.
+
 ## Requirements
 
-These scripts require the Numpy, Scipy, Pandas, and Pysoundfile packages.
+These scripts require the Numpy, Scipy, Pandas packages.
 
 ## Prerequisites
 
@@ -19,4 +20,26 @@ $ python create_wav_2speakers.py
 ```
 The arguments for the script are:
 * **wsj0-root**:  Path to the folder containing `wsj0/`
+* **output-dir**: Where to write the new dataset.
+
+```sh
+$ python create_wav_2speakers_noise.py
+    --wsj0-root  /path/to/wsj/wsj0/
+    --noise-root /path/to/DEMAND/
+    --output-dir /path/to/the/output/directory/
+```
+The arguments for the script are:
+* **wsj0-root**:  Path to the folder containing `wsj0/`
+* **noise-root**: Path to the folder containing `demand/`. If empty, download [DEMAND dataset](https://deepai.org/dataset/demand) automatically.
+* **output-dir**: Where to write the new dataset.
+
+```sh
+$ python create_wav_2speakers_reverb.py
+    --wsj0-root  /path/to/wsj/wsj0/
+    --hrtf-root /path/to/CATT_RIRs/
+    --output-dir /path/to/the/output/directory/
+```
+The arguments for the script are:
+* **wsj0-root**:  Path to the folder containing `wsj0/`
+* **noise-root**: Path to the folder containing `CATT_RIRs/`. If empty, download [Simulated Room Impulse Responses](https://iosr.uk/software/index.php) automatically.
 * **output-dir**: Where to write the new dataset.

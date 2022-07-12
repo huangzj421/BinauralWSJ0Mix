@@ -1,0 +1,19 @@
+Filename,Split,Noise Band
+demand/DWASHING/ch01.wav,Train,0
+demand/DKITCHEN/ch01.wav,Train,0
+demand/NFIELD/ch01.wav,Train,0
+demand/NPARK/ch01.wav,Train,0
+demand/OOFFICE/ch01.wav,Train,0
+demand/OMEETING/ch01.wav,Train,0
+demand/PSTATION/ch01.wav,Test,0
+demand/PRESTO/ch01.wav,Test,0
+demand/STRAFFIC/ch01.wav,Test,0
+demand/SCAFE/ch01.wav,Test,0
+demand/TMETRO/ch01.wav,Test,0
+demand/TCAR/ch01.wav,Test,0
+demand/DLIVING/ch01.wav,Valid,0
+demand/NRIVER/ch01.wav,Valid,0
+demand/OHALLWAY/ch01.wav,Valid,0
+demand/PCAFETER/ch01.wav,Valid,0
+demand/SPSQUARE/ch01.wav,Valid,0
+demand/TBUS/ch01.wav,Valid,0
