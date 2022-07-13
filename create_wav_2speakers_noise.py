@@ -7,7 +7,7 @@ import argparse
 from utils import read_scaled_wav, quantize, fix_length, create_wham_mixes, append_or_truncate, convolve_hrtf
 
 
-def create_wham(wsj_root, noise_path, output_root, wsjmix_16k_root=None, wsjmix_8k_root=None, datafreqs=['8k','16k'], datamodes=['min','max']):
+def create_binaural_wsj0mix(wsj_root, noise_path, output_root, datafreqs=['8k','16k'], datamodes=['min','max'], wsjmix_16k_root=None, wsjmix_8k_root=None):
 
     
     SINGLE_DIR = 'mix_single'
@@ -132,4 +132,4 @@ if __name__ == '__main__':
     parser.add_argument('--output-dir', type=str,
                         help='Output directory for writing binaural wsj0-2mix with noise')
     args = parser.parse_args()
-    create_wham(args.wsj0_root, args.noise_root, args.output_dir)
+    create_binaural_wsj0mix(args.wsj0_root, args.noise_root, args.output_dir)
