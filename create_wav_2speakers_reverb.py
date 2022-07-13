@@ -7,7 +7,7 @@ from urllib.request import urlretrieve
 import zipfile
 
 
-def create_binaural_wsj0mix(wsj_root, output_root, hrtf_root=output_root,
+def create_binaural_wsj0mix(wsj_root, output_root, hrtf_root,
                                   datafreqs=['8k','16k'], datamodes=['min','max']):
 
     S1_DIR = 's1'
@@ -16,9 +16,12 @@ def create_binaural_wsj0mix(wsj_root, output_root, hrtf_root=output_root,
     pypath = os.path.dirname(__file__)
     FILELIST_STUB = os.path.join(pypath, 'metadata', 'mix_2_spk_filenames_{}.csv')
     BINAU = True  # Generate binaural audio
+    if not hrtf_root:
+        hrtf_root = output_root
 
     scaling_npz_stub = os.path.join(pypath, 'metadata', 'scaling_{}.npz')
     hrtf_meta_stub = os.path.join(pypath, 'metadata', 'hrtf_reverb_meta_{}.csv')
+    
     hrtf_wav_path = os.path.join(hrtf_root, 'CATT_RIRs', 'Binaural', '16k')
 
     def reporthook(blocknum, blocksize, totalsize):
@@ -100,7 +103,7 @@ if __name__ == '__main__':
                         help='Path to the folder containing wsj0/')
     parser.add_argument('--output-dir', type=str,
                         help='Output directory for writing binaural wsj0-2mix with reverberation.')
-    parser.add_argument('--hrtf-root', type=str,
+    parser.add_argument('--hrtf-root', type=str, required=False,
                         help='Path to the downloaded CATT RIRs folder')
     args = parser.parse_args()
     create_binaural_wsj0mix(args.wsj0_root, args.output_dir, args.hrtf_root)

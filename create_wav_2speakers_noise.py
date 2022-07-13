@@ -7,7 +7,7 @@ import argparse
 from utils import read_scaled_wav, quantize, fix_length, create_wham_mixes, append_or_truncate, convolve_hrtf
 
 
-def create_binaural_wsj0mix(wsj_root, output_root, noise_path=output_root, 
+def create_binaural_wsj0mix(wsj_root, output_root, noise_path, 
                             datafreqs=['8k','16k'], datamodes=['min','max'], wsjmix_16k_root=None, wsjmix_8k_root=None):
 
     
@@ -25,7 +25,8 @@ def create_binaural_wsj0mix(wsj_root, output_root, noise_path=output_root,
     hrtf_meta_stub = os.path.join(pypath, 'metadata', 'hrtf_meta_{}.csv')
     hrtf_wav_path = os.path.join(pypath, 'CIPIC_hrtf_database', 'wav_database')
     
-    
+    if not noise_path:
+        noise_path = output_root
     if not os.path.exists(os.path.join(noise_path, 'metadata')):
         from run_sample_noise import sample_noise
         sample_noise(wsj_root, noise_path)
@@ -130,7 +131,7 @@ if __name__ == '__main__':
                         help='Path to the folder containing wsj0/')
     parser.add_argument('--output-dir', type=str,
                         help='Output directory for writing binaural wsj0-2mix with noise')
-    parser.add_argument('--noise-root', type=str, default='None',
+    parser.add_argument('--noise-root', type=str, required=False,
                         help='Path to the demand noise folder')
     args = parser.parse_args()
     create_binaural_wsj0mix(args.wsj0_root, args.output_dir, args.noise_root)
