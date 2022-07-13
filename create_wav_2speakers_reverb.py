@@ -7,7 +7,7 @@ from urllib.request import urlretrieve
 import zipfile
 
 
-def create_binaural_wsj0mix(wsj_root, hrtf_root, output_root,
+def create_binaural_wsj0mix(wsj_root, output_root, hrtf_root=output_root,
                                   datafreqs=['8k','16k'], datamodes=['min','max']):
 
     S1_DIR = 's1'
@@ -98,9 +98,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--wsj0-root', type=str,
                         help='Path to the folder containing wsj0/')
-    parser.add_argument('--hrtf-root', type=str,
-                        help='Path to the downloaded CATT RIRs folder')
     parser.add_argument('--output-dir', type=str,
                         help='Output directory for writing binaural wsj0-2mix with reverberation.')
+    parser.add_argument('--hrtf-root', type=str,
+                        help='Path to the downloaded CATT RIRs folder')
     args = parser.parse_args()
-    create_binaural_wsj0mix(args.wsj0_root, args.hrtf_root, args.output_dir)
+    create_binaural_wsj0mix(args.wsj0_root, args.output_dir, args.hrtf_root)
