@@ -12,7 +12,7 @@ def read_scaled_wav(path, scaling_factor, downsample_8K=False):
 
     if downsample_8K:
         samples = resample_poly(samples, 8000, sr_orig)
-    samples *= scaling_factor
+    samples = (samples * scaling_factor)
     return samples
 
 
