@@ -25,21 +25,17 @@ The arguments for the script are:
 ```sh
 $ python create_wav_2speakers_noise.py
     --wsj0-root  /path/to/wsj/wsj0/
-    --noise-root /path/to/DEMAND/
     --output-dir /path/to/the/output/directory/
 ```
 The arguments for the script are:
 * **wsj0-root**:  Path to the folder containing `wsj0/`
-* **noise-root**: Path to the folder containing `demand/`. If empty, download [DEMAND dataset](https://deepai.org/dataset/demand) automatically.
-* **output-dir**: Where to write the new dataset.
+* **output-dir**: Where to write the new dataset. It will download [DEMAND dataset](https://deepai.org/dataset/demand) automatically.
 
 ```sh
 $ python create_wav_2speakers_reverb.py
     --wsj0-root  /path/to/wsj/wsj0/
-    --hrtf-root /path/to/CATT_RIRs/
     --output-dir /path/to/the/output/directory/
 ```
 The arguments for the script are:
 * **wsj0-root**:  Path to the folder containing `wsj0/`
-* **noise-root**: Path to the folder containing `CATT_RIRs/`. If empty, download [Simulated Room Impulse Responses](https://iosr.uk/software/index.php) automatically.
-* **output-dir**: Where to write the new dataset.
+* **output-dir**: Where to write the new dataset. It will download [Simulated Room Impulse Responses](https://iosr.uk/software/index.php) automatically.
