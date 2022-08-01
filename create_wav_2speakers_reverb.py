@@ -17,6 +17,7 @@ def create_binaural_wsj0mix(wsj_root, output_root,
     FILELIST_STUB = os.path.join(pypath, 'metadata', 'mix_2_spk_filenames_{}.csv')
     BINAU = True  # Generate binaural audio
     hrtf_root = os.path.join(output_root, 'hrtfdata')
+    os.makedirs(hrtf_root, exist_ok=True)
 
     scaling_npz_stub = os.path.join(pypath, 'metadata', 'scaling_{}.npz')
     hrtf_meta_stub = os.path.join(pypath, 'metadata', 'hrtf_reverb_meta_{}.csv')
