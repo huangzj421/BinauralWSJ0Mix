@@ -25,11 +25,11 @@ def create_binaural_wsj0mix(wsj_root, output_root,
     hrtf_meta_stub = os.path.join(pypath, 'metadata', 'hrtf_meta_{}.csv')
     hrtf_wav_path = os.path.join(pypath, 'CIPIC_hrtf_database', 'wav_database')
     
-    noise_path = os.path.join(output_root, 'noisedata')
-    os.makedirs(noise_path, exist_ok=True)
-    if not os.path.exists(os.path.join(noise_path, 'metadata')):
+    noise_root = os.path.join(output_root, 'noisedata')
+    os.makedirs(noise_root, exist_ok=True)
+    if not os.path.exists(os.path.join(noise_root, 'metadata')):
         from run_sample_noise import sample_noise
-        sample_noise(wsj_root, noise_path)
+        sample_noise(wsj_root, noise_root)
 
     if wsj_root is not None:
         from_scratch = True
@@ -44,7 +44,7 @@ def create_binaural_wsj0mix(wsj_root, output_root,
         scaling_npz_path = scaling_npz_stub.format(splt)
         scaling_npz = np.load(scaling_npz_path, allow_pickle=True)
 
-        noise_path = os.path.join(noise_path, splt)
+        noise_path = os.path.join(noise_root, splt)
 
         hrtf_meta_path = hrtf_meta_stub.format(splt)
         hrtf_df = pd.read_csv(hrtf_meta_path)
