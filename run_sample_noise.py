@@ -26,9 +26,10 @@ def sample_noise(wsj_root, output_root):
         file = zipfile.ZipFile(os.path.join(output_root, "DemandDataset.zip"))
         file.extractall(path=output_root)
         os.remove(os.path.join(output_root, "DemandDataset.zip"))
-
-    NOISE_SPLIT_CSV = os.path.join('metadata', 'file_splits.csv')
-    FILELIST_STUB = os.path.join('metadata', 'mix_2_spk_filenames_{}.csv')
+    
+    pypath = os.path.dirname(__file__)
+    NOISE_SPLIT_CSV = os.path.join(pypath, 'metadata', 'file_splits.csv')
+    FILELIST_STUB = os.path.join(pypath, 'metadata', 'mix_2_spk_filenames_{}.csv')
     SPLIT_NAMES = {'Train': 'tr', 'Valid': 'cv', 'Test': 'tt'}
 
     SEED = 28
