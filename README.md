@@ -1,4 +1,7 @@
-# Binaural WSJ0Mix dataset
+# News
+Now you can train models of this dataset with speechbrain [here](https://github.com/speechbrain/speechbrain/tree/develop/recipes/BinauralWSJ0Mix/separation).
+
+## Binaural WSJ0Mix dataset
 
 Binaural separation dataset for two or three speakers in [Real-time binaural speech separation with preserved spatial cues](https://ieeexplore.ieee.org/abstract/document/9053215). Briefly, we randomly sampled 2 or 3 speaker locations in the HRTF database from the CIPIC, convolved with randomly sampled two or three utterances from the wsj0 and mixed them all. Also, we created 2 speakers mixture with DEMAND noise or simulated BRIR reverberance.
 
